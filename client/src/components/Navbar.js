@@ -30,22 +30,32 @@ const DownloadButton = styled(Button)({
   backgroundColor: '#fd6f00',
   color: 'white',
   fontWeight: 'bold',
-  fontFamily: 'Poppins, sans-serif', 
+  fontFamily: 'Poppins, sans-serif',
   '&:hover': {
     backgroundColor: '#c51162',
   },
 });
+
+const scrollToSection = (sectionId) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    window.scrollTo({
+      top: element.offsetTop,
+      behavior: 'smooth',
+    });
+  }
+};
 
 const Navbar = () => {
   return (
     <CustomAppBar position="fixed">
       <CustomToolbar>
         <NavLinks>
-          <NavLinkButton>Home</NavLinkButton>
-          <NavLinkButton>About Me</NavLinkButton>
-          <NavLinkButton>Services</NavLinkButton>
-          <NavLinkButton>Projects</NavLinkButton>
-          <NavLinkButton>Contact</NavLinkButton>
+          <NavLinkButton onClick={() => scrollToSection('home')}>Home</NavLinkButton>
+          <NavLinkButton onClick={() => scrollToSection('aboutMe')}>About Me</NavLinkButton>
+          <NavLinkButton onClick={() => scrollToSection('services')}>Services</NavLinkButton>
+          <NavLinkButton onClick={() => scrollToSection('projects')}>Projects</NavLinkButton>
+          <NavLinkButton onClick={() => scrollToSection('contact')}>Contact</NavLinkButton>
           <DownloadButton variant="contained">Download Resume</DownloadButton>
         </NavLinks>
       </CustomToolbar>
