@@ -47,6 +47,13 @@ const HamburgerMenuButton = styled(IconButton)(({ theme }) => ({
   },
 }));
 
+const DrawerContainer = styled(Drawer)(({ theme }) => ({
+  '& .MuiDrawer-paper': {
+    backgroundColor: 'black',
+    color: 'white',
+  },
+}));
+
 const scrollToSection = (sectionId) => {
   const element = document.getElementById(sectionId);
   if (element) {
@@ -102,9 +109,9 @@ const Navbar = () => {
           <DownloadButton variant="contained">Download Resume</DownloadButton>
         </NavLinks>
       </CustomToolbar>
-      <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
+      <DrawerContainer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
         {drawerList}
-      </Drawer>
+      </DrawerContainer>
     </CustomAppBar>
   );
 };
