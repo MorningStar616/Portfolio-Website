@@ -1,25 +1,28 @@
-import React from 'react';
-import { AppBar, Toolbar, Button } from '@mui/material';
+import React, { useState } from 'react';
+import { AppBar, Toolbar, Button, IconButton, Drawer, List, ListItem, ListItemText } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import { styled } from '@mui/system';
 
 const CustomAppBar = styled(AppBar)({
-  alignItems: 'center',
   boxShadow: 'none',
   backgroundColor: 'transparent',
 });
 
 const CustomToolbar = styled(Toolbar)({
   display: 'flex',
-  justifyContent: 'center',
+  justifyContent: 'space-between',
   width: '100%',
 });
 
-const NavLinks = styled('div')({
+const NavLinks = styled('div')(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   gap: '16px',
   flexGrow: 1,
-});
+  [theme.breakpoints.down('sm')]: {
+    display: 'none',
+  },
+}));
 
 const NavLinkButton = styled(Button)({
   color: 'white',
@@ -32,9 +35,17 @@ const DownloadButton = styled(Button)({
   fontWeight: 'bold',
   fontFamily: 'Poppins, sans-serif',
   '&:hover': {
-    backgroundColor: '#c51162',
+    backgroundColor: '#e65c00',
   },
 });
+
+const HamburgerMenuButton = styled(IconButton)(({ theme }) => ({
+  display: 'none',
+  color: 'white',
+  [theme.breakpoints.down('sm')]: {
+    display: 'block',
+  },
+}));
 
 const scrollToSection = (sectionId) => {
   const element = document.getElementById(sectionId);
@@ -47,9 +58,41 @@ const scrollToSection = (sectionId) => {
 };
 
 const Navbar = () => {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const toggleDrawer = (open) => () => {
+    setDrawerOpen(open);
+  };
+
+  const drawerList = (
+    <List>
+      <ListItem button onClick={() => { scrollToSection('home'); setDrawerOpen(false); }}>
+        <ListItemText primary="Home" />
+      </ListItem>
+      <ListItem button onClick={() => { scrollToSection('aboutMe'); setDrawerOpen(false); }}>
+        <ListItemText primary="About Me" />
+      </ListItem>
+      <ListItem button onClick={() => { scrollToSection('services'); setDrawerOpen(false); }}>
+        <ListItemText primary="Services" />
+      </ListItem>
+      <ListItem button onClick={() => { scrollToSection('projects'); setDrawerOpen(false); }}>
+        <ListItemText primary="Projects" />
+      </ListItem>
+      <ListItem button onClick={() => { scrollToSection('contact'); setDrawerOpen(false); }}>
+        <ListItemText primary="Contact" />
+      </ListItem>
+      <ListItem button>
+        <DownloadButton variant="contained" fullWidth>Download Resume</DownloadButton>
+      </ListItem>
+    </List>
+  );
+
   return (
     <CustomAppBar position="fixed">
       <CustomToolbar>
+        <HamburgerMenuButton edge="start" onClick={toggleDrawer(true)}>
+          <MenuIcon />
+        </HamburgerMenuButton>
         <NavLinks>
           <NavLinkButton onClick={() => scrollToSection('home')}>Home</NavLinkButton>
           <NavLinkButton onClick={() => scrollToSection('aboutMe')}>About Me</NavLinkButton>
@@ -59,6 +102,9 @@ const Navbar = () => {
           <DownloadButton variant="contained">Download Resume</DownloadButton>
         </NavLinks>
       </CustomToolbar>
+      <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
+        {drawerList}
+      </Drawer>
     </CustomAppBar>
   );
 };
