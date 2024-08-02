@@ -2,8 +2,11 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import { Box } from '@mui/material';
 import { styled } from '@mui/system';
-import homeImage from '../images/images-removebg-preview.png'; 
-
+import homeImage from '../images/images-removebg-preview.png';
+import AboutMe from './AboutMe';
+import Services from './Services';
+import Projects from './Projects';
+import Contact from './Contact'; 
 
 const sectionStyle = {
   padding: '50px 0',
@@ -106,22 +109,10 @@ const LandingPage = () => {
           <ImageSection src={homeImage} alt="Home Image" />
         </ImageContainer>
       </Box>
-      <Box id="aboutMe" style={sectionStyle}>
-        <h1>About Me Section</h1>
-        <p>Welcome to the About Me section!</p>
-      </Box>
-      <Box id="services" style={sectionStyle}>
-        <h1>Services Section</h1>
-        <p>Welcome to the Services section!</p>
-      </Box>
-      <Box id="projects" style={sectionStyle}>
-        <h1>Projects Section</h1>
-        <p>Welcome to the Projects section!</p>
-      </Box>
-      <Box id="contact" style={sectionStyle}>
-        <h1>Contact Section</h1>
-        <p>Welcome to the Contact section!</p>
-      </Box>
+      <AboutMe />
+      <Services />
+      <Projects />
+      <Contact />
     </div>
   );
 };
