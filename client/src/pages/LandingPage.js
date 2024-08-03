@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
+import Starfield from '../components/Starfield';
 import { Box, Grid, Button, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import homeImage from '../images/images-removebg-preview.png';
@@ -19,9 +20,11 @@ const sectionStyle = {
 const TextSection = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
   textAlign: 'left',
+  zIndex: 1, 
+  color: 'white',
   [theme.breakpoints.up('md')]: {
     marginLeft: theme.spacing(10),
-    marginTop: theme.spacing(-10),
+    marginTop: theme.spacing(5),
   },
 }));
 
@@ -32,12 +35,13 @@ const Heading = styled(Typography)(({ theme }) => ({
 
 const SubHeading = styled(Typography)(({ theme }) => ({
   fontSize: '1.5rem',
+  fontWeight: 'bold',
   margin: '0',
   color: '#fd6f00',
 }));
 
 const Highlight = styled(Typography)(({ theme }) => ({
-  fontSize: '3rem',
+  fontSize: '3.5rem',
   fontWeight: 'bold',
   lineHeight: '1.2',
 }));
@@ -81,6 +85,7 @@ const ImageSection = styled('img')(({ theme }) => ({
 const LandingPage = () => {
   return (
     <Box>
+      <Starfield />
       <Navbar />
       <Box id="home" style={sectionStyle}>
         <Grid container spacing={3} alignItems="center">
